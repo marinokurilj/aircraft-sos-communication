@@ -1,4 +1,4 @@
-## Aviation System of Systems: Implications of Inter-Aircraft Communcation 
+## Aviation System of Systems: Implications of Inter-Aircraft Communcation Modeling
 
 This repository contains a Python-based simulation developed as part of a Master’s thesis at **Linköping University, Sweden**.  
 The project investigates **inter-aircraft communication and decentralized en-route weather avoidance** from a **System-of-Systems (SoS)** perspective.
