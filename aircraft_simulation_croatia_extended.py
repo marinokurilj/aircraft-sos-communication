@@ -1,6 +1,4 @@
 # aircraft_simulation_croatia.py
-# North-up / East-right. Triangular corridor meshes.
-# Weather comms persist ≥10 min; hard/soft zones for robust local rerouting.
 
 import os, time, uuid, math, random, csv
 from math import sqrt
@@ -118,7 +116,6 @@ ALT_COLOR_TO_ALT_M = {
 }
 
 # --- Simple parasitic drag proxy via CdA (C_D0 * S) per aircraft class (m²) ------------
-# Keep it simple, order-of-magnitude only; we use this *only* for relative DOC. :contentReference[oaicite:3]{index=3}
 MODEL_CDA_M2 = {
     "C172-class": 0.55,
     "PA-28-class": 0.52,
@@ -126,7 +123,7 @@ MODEL_CDA_M2 = {
 }
 
 # --- Wind used ONLY for DOC/time outputs (not for animation) ---------------------------
-# "north-easternly wind at 50 km/h" interpreted as blowing TOWARD the south-east (arrow to SE).
+# "north-easternly wind at 50 km/h" interpreted as blowing toward the south-east (arrow to SE).
 WIND_SPEED_KMH = 50.0
 WIND_DIR_DEG   = 135.0  # 0°=East, 90°=South in our North-up/East-right (y increases to South)
 import math as _math
@@ -1152,7 +1149,7 @@ def run_single(seed:int,
                     continue
  
         #leader immunity — if this aircraft originated any still-active alert, do NOT reroute it.
-        #It will still experience slowdown via 'slowed_edges'.
+        #It will still experience slowdown via 'slowed_edges' (delay as approx of avoidance on a higher resolution mesh).
                 if originator_until.get(ac['callsign'], 0.0) > now_sim_sec:
             # keep flying through with reduced speed; skip the reroute branch entirely
                     continue
@@ -1607,3 +1604,4 @@ if __name__ == "__main__":
                    csv_dir=os.getenv("CSV_DIR", CSV_DIR_DEFAULT),
                    alert_latency_sim_s=float(os.getenv("ALERT_LATENCY_SIM_S", str(ALERT_LATENCY_SIM_S_DEFAULT))))
         print("\n=== DONE: single run finished ===")
+
